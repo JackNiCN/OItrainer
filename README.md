@@ -63,11 +63,13 @@
 ---
 
 ## ✉️ 致谢与联系方式
-
+### 原作者
 - 作者：**seve42**  
 - Luogu：`seve_`  
 - 邮箱：`dreamer-seve@outlook.com` 或 `dreamersseve@gmail.com`
 
+### 改编作者
+- 作者：**JackNiCN**  
 ---
 
 # [设计理念](ZEN.md)
