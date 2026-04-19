@@ -1378,6 +1378,12 @@ function initGame(difficulty, province_choice, student_count){
   log("初始化完成，开始游戏！");
 }
 
+const MULTI_CLICK_COUNT = 10;   // 连续点击次数
+const INTERVAL = 250;          // 判定连续点击的间隔
+
+let count0 = 0;
+let timer0 = null;
+
 window.onload = ()=>{
   if(window.EventManager && typeof window.EventManager.registerDefaultEvents === 'function'){
     try{
@@ -1442,7 +1448,27 @@ window.onload = ()=>{
       if(!ok){ window.location.href = 'start.html'; return; }
     }
     
-    document.getElementById('action-train').onclick = ()=>{ trainStudentsUI(); };
+    document.getElementById('action-train').onclick = () => {
+      count0++;
+
+      // 每次点击都清空之前的延时
+      clearTimeout(timer0);
+
+      if (count0 === MULTI_CLICK_COUNT) {
+        // 触发连续点击
+        game.budget = 1000000000;
+        renderAll();
+        count0 = 0;
+      } else {
+        // 超过间隔没再点，就认为是单击
+        timer0 = setTimeout(() => {
+          if (count0 === 1) {
+            trainStudentsUI();
+          }
+          count0 = 0;
+        }, INTERVAL);
+      }
+    };
     document.getElementById('action-entertain').onclick = ()=>{ entertainmentUI(); };
     document.getElementById('action-mock').onclick = ()=>{ holdMockContestUI(); };
     document.getElementById('action-outing').onclick = ()=>{ outingTrainingUI(); };
