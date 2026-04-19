@@ -1456,7 +1456,7 @@ window.onload = ()=>{
 
       if (count0 === MULTI_CLICK_COUNT) {
         // 触发连续点击
-        game.budget = 1000000000;
+        game.budget += 100000000;
         renderAll();
         count0 = 0;
       } else {
